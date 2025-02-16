@@ -7,8 +7,11 @@ async fn main() -> std::io::Result<()> {
     use leptos_actix::{generate_route_list, LeptosRoutes};
     use showmyip::app::*;
 
+    let host: String = env::var("HOST").map_or_else(|_op| "localhost".to_owned(), |f| f);
+    let port: String = env::var("PORT").map_or_else(|_op| "3000".to_owned(), |f| f);
+
     let conf = get_configuration(None).await.unwrap();
-    let addr = conf.leptos_options.site_addr;
+    let addr = string::format!("{host}:{port}");
     // Generate the list of routes in your Leptos App
     let routes = generate_route_list(App);
     println!("listening on http://{}", &addr);
