@@ -5,7 +5,7 @@ use actix_web::{get, App, HttpRequest, HttpResponse, HttpServer, Responder};
 #[get("/")]
 async fn index(req: HttpRequest) -> impl Responder {
     HttpResponse::Ok().body(format!(
-        "Your IP is: {}",
+        "<html><body style=\"background-color: black\"><h1 style=\"color: white\">Your IP is: {}</h1></body></html>",
         req.connection_info()
             .realip_remote_addr()
             .unwrap_or("unknown")
